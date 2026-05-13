@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الوسيط الاقتصادي - لوحة التحكم</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-body">
+    
+
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>الوسيط الاقتصادي</h2>
+            <span>النسخة الاحترافية v1.0</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active"><i class="fas fa-chart-line"></i> الإحصائيات العامة</li>
+            <li onclick="smoothNavigate('accounting.html')"><i class="fas fa-file-invoice-dollar"></i> الملف المحاسبي</li>
+            <li onclick="smoothNavigate('suppliers.html')"><i class="fas fa-users"></i> نافذة الموردين</li>
+            <li onclick="smoothNavigate('legal.html')"><i class="fas fa-gavel"></i> الملحق القانوني</li>
+            <li onclick="smoothNavigate('support.html')"><i class="fas fa-headset"></i> مركز الاستشارات</li>
+            <li onclick="smoothNavigate('analysis.html')">
+    <i class="fas fa-chart-line"></i>
+    التحليل المالي
+</li>
+      <li onclick="smoothNavigate('trainees.html')"><i class="fas fa-graduation-cap"></i> المتدربون</li>
+      <li onclick="openService('services')"><i class="fas fa-concierge-bell"></i> الخدمات</li>
+            <li onclick="showProfileModal()" class="sidebar-profile"><i class="fas fa-user"></i> ملف الشخصي</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="dashboard-header">
+            <h1>لوحة التحكم الرئيسية</h1>
+          <div class="user-info">
+
+    <!-- Notifications -->
+    <div class="notifications" onclick="showAlerts()">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3</span>
+    </div>
+
+    <!-- User Profile -->
+    <div class="user-profile" onclick="toggleProfileMenu()">
+
+        <div class="user-avatar">
+            A
+        </div>
+
+        <div class="user-details">
+            <h4 id="userName">اسم المستخدم</h4>
+            <p id="userEmail">email@example.com</p>
+        </div>
+
+        <i class="fas fa-chevron-down"></i>
+
+        <!-- Dropdown Menu -->
+        <div id="profileMenu" class="profile-menu hidden">
+            <p onclick="showProfileModal()"><i class="fas fa-user"></i> الملف الشخصي</p>
+            <p onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</p>
+        </div>
+
+    </div>
+
+</div>
+
+        </header>
+
+        <!-- Alerts Box -->
+        <div id="alertsBox" class="alerts-box hidden">
+            <div id="alerts-list">
+                <p><i class="fas fa-info-circle"></i> موعد تقديم التصريح الضريبي يقترب</p>
+                <p><i class="fas fa-check-circle"></i> تم تحديث أسعار الموردين</p>
+            </div>
+            <button onclick="addAlert()">إضافة إشعار</button>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeProfileModal()">&times;</span>
+                <h3>تحرير الملف الشخصي</h3>
+                <label>الاسم:</label>
+                <input type="text" id="profile-name" value="اسم المستخدم">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="profile-email" value="email@example.com">
+                <button onclick="saveProfile()">حفظ</button>
+            </div>
+        </div>
+
+        <!-- Services Widgets -->
+        <section class="widgets">
+            <div class="widget-card" onclick="window.location.href='accounting.html'">
+                <div class="widget-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                <div class="widget-data">
+                    <h3>الملف المحاسبي</h3>
+                    <p id="accounting-count">0 فاتورة</p>
+                </div>
+            </div>
+            <div class="widget-card" onclick="window.location.href='suppliers.html'">
+                <div class="widget-icon"><i class="fas fa-users"></i></div>
+                <div class="widget-data">
+                    <h3>نافذة الموردين</h3>
+                    <p id="suppliers-count">0 مورد</p>
+                </div>
+            </div>
+            <div class="widget-card" onclick="goToLegal('legal')">
+                <div class="widget-icon"><i class="fas fa-gavel"></i></div>
+                <div class="widget-data">
+                    <h3>الملحق القانوني</h3>
+                    <p>الاستشارات القانونية والمستندات</p>
+                </div>
+            </div>
+            <div class="widget-card" onclick="goToSupport('support')">
+                <div class="widget-icon"><i class="fas fa-headset"></i></div>
+                <div class="widget-data">
+                    <h3>مركز الاستشارات</h3>
+                    <p>طلب الدعم والمساعدة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Section -->
+        <section class="chart-section">
+            <h2>إحصائيات الموردين</h2>
+            <canvas id="suppliersChart"></canvas>
+        </section>
+
+    
+    </main>
+
+
+
+
+
+    
+</div>
+
+<script src="javascript/script.js"></script>
+</body>
+</html>

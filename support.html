@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مركز الاستشارات</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>الوسيط الاقتصادي</h2>
+            <span>النسخة الاحترافية v1.0</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li onclick="smoothNavigate('dashboard.html')"><i class="fas fa-home"></i> لوحة التحكم</li>
+            <li onclick="smoothNavigate('accounting.html')"><i class="fas fa-file-invoice-dollar"></i> الملف المحاسبي</li>
+            <li onclick="smoothNavigate('suppliers.html')"><i class="fas fa-users"></i> نافذة الموردين</li>
+            <li onclick="smoothNavigate('legal.html')"><i class="fas fa-gavel"></i> الملحق القانوني</li>
+            <li class="active"><i class="fas fa-headset"></i> مركز الاستشارات</li>
+            <li onclick="smoothNavigate('analysis.html')">
+    <i class="fas fa-chart-line"></i>
+    التحليل المالي
+</li>
+      <li onclick="smoothNavigate('trainees.html')"><i class="fas fa-graduation-cap"></i> المتدربون</li>
+      <li onclick="openService('services')"><i class="fas fa-concierge-bell"></i> الخدمات</li>
+            <li onclick="showProfileModal()" class="sidebar-profile"><i class="fas fa-user"></i> ملف الشخصي</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="dashboard-header">
+            <h1>مركز الاستشارات</h1>
+          <div class="user-info">
+
+    <!-- Notifications -->
+    <div class="notifications" onclick="showAlerts()">
+        <i class="fas fa-bell"></i>
+        <span class="badge">1</span>
+    </div>
+
+    <!-- User Profile -->
+    <div class="user-profile" onclick="toggleProfileMenu()">
+
+        <div class="user-avatar">
+            A
+        </div>
+
+        <div class="user-details">
+            <h4 id="userName">اسم المستخدم</h4>
+            <p id="userEmail">email@example.com</p>
+        </div>
+
+        <i class="fas fa-chevron-down"></i>
+
+        <!-- Dropdown Menu -->
+        <div id="profileMenu" class="profile-menu hidden">
+            <p onclick="showProfileModal()"><i class="fas fa-user"></i> الملف الشخصي</p>
+            <p onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</p>
+        </div>
+
+    </div>
+
+</div>
+
+        </header>
+
+        <!-- Alerts Box -->
+        <div id="alertsBox" class="alerts-box hidden">
+            <p><i class="fas fa-info-circle"></i> تذكير بتجديد التراخيص القانونية</p>
+            <button onclick="addAlert()">إضافة إشعار</button>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeProfileModal()">&times;</span>
+                <h3>تحرير الملف الشخصي</h3>
+                <label>الاسم:</label>
+                <input type="text" id="profile-name" value="اسم المستخدم">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="profile-email" value="email@example.com">
+                <button onclick="saveProfile()">حفظ</button>
+            </div>
+        </div>
+
+        <p>
+            هذا القسم يتيح لك التواصل مع متخصصين اقتصاديين وقانونيين لتقديم الاستشارات،
+            طلب المساعدة أو التدريب.
+        </p>
+
+        <div class="support-widgets">
+
+            <div class="widget-card" onclick="showEconomicConsulting()">
+                <div class="widget-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="widget-data">
+                    <h3>استشارات اقتصادية</h3>
+                    <p>تقديم نصائح وخطط اقتصادية للشركات</p>
+                </div>
+            </div>
+
+            <div class="widget-card" onclick="showLegalSupport()">
+                <div class="widget-icon"><i class="fas fa-gavel"></i></div>
+                <div class="widget-data">
+                    <h3>استشارات قانونية</h3>
+                    <p>مساعدة قانونية مباشرة مع مستشارين مختصين</p>
+                </div>
+            </div>
+
+            <div class="widget-card" onclick="showTraining()">
+                <div class="widget-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div class="widget-data">
+                    <h3>التدريب والتكوين</h3>
+                    <p>وصل الباحثين عن كفاءات مع الشركات للتدريب</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Dynamic Content -->
+        <div id="dynamic-content" class="dynamic-content">
+            <h2>اختر نوع الاستشارة لعرض المحتوى</h2>
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<script src="javascript/script.js"></script>
+</body>
+</html>

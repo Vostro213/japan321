@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الخدمات - الوسيط الاقتصادي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="service-container">
+
+    <!-- Header -->
+    <header class="service-header">
+        <h1 id="serviceTitle">الخدمات الاقتصادية</h1>
+        <a href="dashboard.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            العودة إلى لوحة التحكم
+        </a>
+    </header>
+
+    <!-- Description -->
+    <div class="service-description">
+        <p id="serviceDescription">
+            اختر خدمة لعرض التفاصيل
+        </p>
+    </div>
+
+    <!-- Services -->
+    <section class="widgets">
+
+        <!-- الملف المحاسبي -->
+        <div class="widget-card" onclick="openService('accounting')">
+            <div class="widget-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div class="widget-data">
+                <h3>الملف المحاسبي</h3>
+                <p>متابعة الحسابات، إدارة الفواتير والمعاملات المالية.</p>
+            </div>
+        </div>
+
+        <!-- الموردين -->
+        <div class="widget-card" onclick="openService('suppliers')">
+            <div class="widget-icon"><i class="fas fa-users"></i></div>
+            <div class="widget-data">
+                <h3>نافذة الموردين</h3>
+                <p>التواصل مع الموردين في المجالات الاقتصادية، الفلاحية، والاستشفائية.</p>
+            </div>
+        </div>
+
+        <!-- الملحق القانوني -->
+        <div class="widget-card" onclick="openService('legal')">
+            <div class="widget-icon"><i class="fas fa-gavel"></i></div>
+            <div class="widget-data">
+                <h3>الملحق القانوني</h3>
+                <p>استشارات قانونية لجميع الحالات المتعلقة بالنشاط الاقتصادي.</p>
+            </div>
+        </div>
+
+        <!-- مركز الاستشارات -->
+        <div class="widget-card" onclick="openService('support')">
+            <div class="widget-icon"><i class="fas fa-headset"></i></div>
+            <div class="widget-data">
+                <h3>مركز الاستشارات</h3>
+                <p>الوصول إلى متخصصين ومستشارين اقتصاديين وقانونيين.</p>
+            </div>
+        </div>
+
+        <!-- دراسة السوق -->
+        <div class="widget-card" onclick="openService('market')">
+            <div class="widget-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="widget-data">
+                <h3>دراسة السوق</h3>
+                <p>فهم العرض والطلب والمنافسين وتحديد الفرص الاستثمارية.</p>
+            </div>
+        </div>
+
+        <!-- إدارة المشاريع -->
+        <div class="widget-card" onclick="openService('project')">
+            <div class="widget-icon"><i class="fas fa-project-diagram"></i></div>
+            <div class="widget-data">
+                <h3>إدارة المشاريع</h3>
+                <p>تنظيم العمل، توزيع المهام وتحقيق أهداف المشروع.</p>
+            </div>
+        </div>
+
+        <!-- التحليل المالي -->
+        <div class="widget-card" onclick="openService('finance')">
+            <div class="widget-icon"><i class="fas fa-coins"></i></div>
+            <div class="widget-data">
+                <h3>التحليل المالي</h3>
+                <p>تقييم الأرباح والخسائر وتحليل الأداء المالي.</p>
+            </div>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div class="widget-card" onclick="openService('stats')">
+            <div class="widget-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="widget-data">
+                <h3>الإحصائيات</h3>
+                <p>عرض البيانات وتحليلها لاتخاذ قرارات اقتصادية دقيقة.</p>
+            </div>
+        </div>
+
+        <!-- الميزان والمراجعة -->
+        <div class="widget-card" onclick="openService('balance')">
+            <div class="widget-icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="widget-data">
+                <h3>ميزان المراجعة</h3>
+                <p>عرض المجاميع والأرصدة أونلاين لمتابعة الأصول والخصوم.</p>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+<script src="javascript/script.js"></script>
+
+<script>
+let service = localStorage.getItem("service");
+let title = document.getElementById("serviceTitle");
+let desc = document.getElementById("serviceDescription");
+
+switch(service) {
+    case "accounting":
+        title.innerText = "الملف المحاسبي";
+        desc.innerText = "متابعة الحسابات، إدارة الفواتير والمعاملات المالية للشركة.";
+        break;
+    case "suppliers":
+        title.innerText = "نافذة الموردين";
+        desc.innerText = "التواصل مع الموردين والشركات في مختلف المجالات الاقتصادية، الفلاحية والاستشفائية.";
+        break;
+    case "legal":
+        title.innerText = "الملحق القانوني";
+        desc.innerText = "تقديم استشارات قانونية متخصصة لجميع الحالات الاقتصادية.";
+        break;
+    case "support":
+        title.innerText = "مركز الاستشارات";
+        desc.innerText = "الوصول إلى متخصصين ومستشارين اقتصاديين وقانونيين لتقديم الدعم.";
+        break;
+    case "market":
+        title.innerText = "دراسة السوق";
+        desc.innerText = "تحليل السوق، العرض والطلب والمنافسين لتحديد الفرص الاستثمارية.";
+        break;
+    case "project":
+        title.innerText = "إدارة المشاريع";
+        desc.innerText = "تنظيم المشاريع، توزيع المهام وتحقيق أهداف المشروع بنجاح.";
+        break;
+    case "finance":
+        title.innerText = "التحليل المالي";
+        desc.innerText = "تقييم الأرباح والخسائر وتحليل الأداء المالي للمشاريع.";
+        break;
+    case "stats":
+        title.innerText = "الإحصائيات";
+        desc.innerText = "عرض البيانات والأرقام لتحليل القرارات الاقتصادية بدقة.";
+        break;
+    case "balance":
+        title.innerText = "ميزان المراجعة";
+        desc.innerText = "عرض المجاميع والأرصدة أونلاين لمتابعة الأصول والخصوم وحساب النتائج.";
+        break;
+    default:
+        title.innerText = "الخدمات الاقتصادية";
+        desc.innerText = "اختر خدمة لعرض التفاصيل.";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>المتدربون - الوسيط الاقتصادي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* خلفية ضبابية للـ Modal */
+        .cv-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cv-modal-overlay.active {
+            display: flex;
+        }
+
+        .cv-modal-content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-width: 900px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cv-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .cv-modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .cv-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .cv-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .cv-modal-body {
+            padding: 30px;
+        }
+
+        .cv-frame {
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            height: 600px;
+            background: white;
+        }
+
+        /* قائمة الملفات */
+        .trainees-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .trainee-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .trainee-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .trainee-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .trainee-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 15px;
+            border: 3px solid white;
+        }
+
+        .trainee-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .trainee-specialty {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .trainee-body {
+            padding: 20px;
+        }
+
+        .trainee-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .trainee-info i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .trainee-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-cv {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-cv:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-contact {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-contact:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .section-title {
+            padding: 30px 30px 0 30px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-subtitle {
+            padding: 0 30px 20px 30px;
+            color: var(--text-light);
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <h2>الوسيط الاقتصادي</h2>
+            <span>النسخة الاحترافية v1.0</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li onclick="smoothNavigate('dashboard.html')"><i class="fas fa-home"></i> لوحة التحكم</li>
+            <li onclick="smoothNavigate('accounting.html')"><i class="fas fa-file-invoice-dollar"></i> الملف المحاسبي</li>
+            <li onclick="smoothNavigate('suppliers.html')"><i class="fas fa-users"></i> نافذة الموردين</li>
+            <li onclick="smoothNavigate('legal.html')"><i class="fas fa-gavel"></i> الملحق القانوني</li>
+            <li onclick="smoothNavigate('support.html')"><i class="fas fa-headset"></i> مركز الاستشارات</li>
+            <li onclick="smoothNavigate('analysis.html')">
+                <i class="fas fa-chart-line"></i>
+                التحليل المالي
+            </li>
+            <li class="active"><i class="fas fa-graduation-cap"></i> المتدربون</li>
+            <li onclick="openService('services')"><i class="fas fa-concierge-bell"></i> الخدمات</li>
+            <li onclick="showProfileModal()" class="sidebar-profile"><i class="fas fa-user"></i> ملف الشخصي</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="dashboard-header">
+            <h1>المتدربون</h1>
+            <div class="user-info">
+
+                <!-- Notifications -->
+                <div class="notifications" onclick="showAlerts()">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">2</span>
+                </div>
+
+                <!-- User Profile -->
+                <div class="user-profile" onclick="toggleProfileMenu()">
+                    <div class="user-avatar">A</div>
+                    <div class="user-details">
+                        <h4 id="userName">اسم المستخدم</h4>
+                        <p id="userEmail">email@example.com</p>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+
+                    <!-- Dropdown Menu -->
+                    <div id="profileMenu" class="profile-menu hidden">
+                        <p onclick="showProfileModal()"><i class="fas fa-user"></i> الملف الشخصي</p>
+                        <p onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Alerts Box -->
+        <div id="alertsBox" class="alerts-box hidden">
+            <p><i class="fas fa-info-circle"></i> توفر متدربين جدد يبحثون عن فرص تدريب</p>
+            <button onclick="addAlert()">إضافة إشعار</button>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeProfileModal()">&times;</span>
+                <h3>تحرير الملف الشخصي</h3>
+                <label>الاسم:</label>
+                <input type="text" id="profile-name" value="اسم المستخدم">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="profile-email" value="email@example.com">
+                <button onclick="saveProfile()">حفظ</button>
+            </div>
+        </div>
+
+        <!-- Section Title -->
+        <div class="section-title">
+            <i class="fas fa-graduation-cap"></i>
+            المتدربون يبحثون عن فرص عمل
+        </div>
+        <div class="section-subtitle">
+            تصفح السير الذاتية والبيانات الشخصية للمتدربين والطلاب الباحثين عن فرص تدريب أو عمل في شركتك
+        </div>
+
+        <!-- Trainees List -->
+        <div class="trainees-container" id="traineesContainer">
+            <!-- سيتم ملؤها بالـ JavaScript -->
+        </div>
+
+    </main>
+
+</div>
+
+<!-- CV Modal Overlay with Blur Effect -->
+<div class="cv-modal-overlay" id="cvModalOverlay">
+    <div class="cv-modal-content">
+        <div class="cv-modal-header">
+            <h2 id="cvModalTitle">السيرة الذاتية</h2>
+            <button class="cv-close-btn" onclick="closeCVModal()">×</button>
+        </div>
+        <div class="cv-modal-body">
+            <iframe id="cvFrame" class="cv-frame" src=""></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="javascript/script.js"></script>
+<script>
+    // بيانات المتدربين
+    const traineesData = [
+        {
+            id: 1,
+            name: "Seif Eddine Benattouche",
+            specialty: "Administrative & Legal Affairs Specialist",
+            email: "sifouharry@gmail.com",
+            phone: "+213 669 397 816",
+            location: "Sidi Bel Abbès, Algeria",
+            avatar: "S",
+            cvFile: "cv/cv1pdf.pdf"
+        },
+        {
+            id: 2,
+            name: "Benyekhlef Mohamed",
+            specialty: "Ingénieur en électrotechnique",
+            email: "mohamedbnkh22@gmail.com",
+            phone: "+213 676 272 014",
+            location: "Sidi Bel Abbès, Algeria",
+            avatar: "B",
+            cvFile: "cv/cv2pdf.pdf"
+        }
+    ];
+
+    // تحميل بيانات المتدربين عند فتح الصفحة
+    window.addEventListener('DOMContentLoaded', function() {
+        loadTrainees();
+    });
+
+    // دالة لتحميل المتدربين
+    function loadTrainees() {
+        const container = document.getElementById('traineesContainer');
+        
+        if (traineesData.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1/-1;">
+                    <div class="empty-state">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>لا توجد متدربون حالياً</h3>
+                        <p>سيتم إضافة المتدربين الجدد قريباً</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = traineesData.map(trainee => `
+            <div class="trainee-card">
+                <div class="trainee-header">
+                    <div class="trainee-avatar">${trainee.avatar}</div>
+                    <div class="trainee-name">${trainee.name}</div>
+                    <div class="trainee-specialty">${trainee.specialty}</div>
+                </div>
+                <div class="trainee-body">
+                    <div class="trainee-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>${trainee.email}</span>
+                    </div>
+                    <div class="trainee-info">
+                        <i class="fas fa-phone"></i>
+                        <span>${trainee.phone}</span>
+                    </div>
+                    <div class="trainee-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${trainee.location}</span>
+                    </div>
+                    <div class="trainee-buttons">
+                        <button class="btn-cv" onclick="openCVModal(${trainee.id}, '${trainee.name}', '${trainee.cvFile}')">
+                            <i class="fas fa-file-pdf"></i> عرض CV
+                        </button>
+                        <button class="btn-contact">
+                            <i class="fas fa-envelope"></i> تواصل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // دالة لفتح الـ CV في نافذة بخلفية ضبابية
+    function openCVModal(id, name, cvFile) {
+        const overlay = document.getElementById('cvModalOverlay');
+        const iframe = document.getElementById('cvFrame');
+        const title = document.getElementById('cvModalTitle');
+        
+        title.textContent = `السيرة الذاتية - ${name}`;
+        iframe.src = cvFile;
+        overlay.classList.add('active');
+    }
+
+    // دالة لإغلاق الـ CV Modal
+    function closeCVModal() {
+        const overlay = document.getElementById('cvModalOverlay');
+        overlay.classList.remove('active');
+        document.getElementById('cvFrame').src = '';
+    }
+
+    // إغلاق الـ Modal عند الضغط خارجه
+    document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('cvModalOverlay');
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeCVModal();
+            }
+        });
+    });
+
+    // دالة التنقل السلس
+    function smoothNavigate(page) {
+        window.location.href = page;
+    }
+</script>
+</body>
+</html>

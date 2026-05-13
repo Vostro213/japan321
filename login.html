@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الوسيط الاقتصادي - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Left Side -->
+    <div class="left">
+        <div class="animated-logo">
+            <span id="textAnimation">Economic Mediator</span>
+        </div>
+        <p class="slogan">
+            بوابتك المتكاملة للإدارة المحاسبية والقانونية
+        </p>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right">
+        <div class="login-card">
+            <h2>تسجيل الدخول</h2>
+            <input type="text" id="email" placeholder="الايميل">
+
+            <div class="password-box">
+                <input type="password" id="password" placeholder="كلمة السر">
+                <span class="eye" onclick="showPassword()">👁️</span>
+            </div>
+
+            <small id="emailError" class="error"></small>
+            <small id="passError" class="error"></small>
+
+            <button onclick="login()">دخول آمن</button>
+
+            <a href="#">نسيت كلمة المرور؟</a>
+            <a href="#">إنشاء حساب جديد</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="javascript/script.js"></script>
+</body>
+</html>

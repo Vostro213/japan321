@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>نافذة الموردين</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>الوسيط الاقتصادي</h2>
+            <span>النسخة الاحترافية</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li onclick="goToDashboard()">
+                <i class="fas fa-home"></i>
+                لوحة التحكم
+            </li>
+
+            <li onclick="goToAccounting()">
+                <i class="fas fa-file-invoice-dollar"></i>
+                الملف المحاسبي
+            </li>
+
+            <li class="active">
+                <i class="fas fa-users"></i>
+                الموردين
+            </li>
+
+            <li onclick="goToLegal()">
+                <i class="fas fa-gavel"></i>
+                القانوني
+            </li>
+
+            <li onclick="goToSupport()">
+                <i class="fas fa-headset"></i>
+                الاستشارات
+            </li>
+
+            <li onclick="window.location.href='trainees.html'">
+                <i class="fas fa-graduation-cap"></i>
+                المتدربون
+            </li>
+
+            <li onclick="openService('services')"><i class="fas fa-concierge-bell"></i> الخدمات</li>
+            <li onclick="showProfileModal()" class="sidebar-profile"><i class="fas fa-user"></i> ملف الشخصي</li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <header class="dashboard-header">
+            <h1>نافذة الموردين</h1>
+        </header>
+
+        <!-- Suppliers Section -->
+
+        <section class="suppliers-section">
+
+
+
+
+<!-- Supplier Example Card -->
+<div class="supplier-card" id="supplier-card" style="display: none;">
+    <div class="supplier-image">
+        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df" alt="Supplier">
+    </div>
+
+    <div class="supplier-info">
+        <h3 id="card-name">شركة النور للتجارة العامة</h3>
+        <p><i class="fas fa-phone"></i> <span id="card-phone">0555 12 34 56</span></p>
+        <p><i class="fas fa-briefcase"></i> <span id="card-product">مواد غذائية</span></p>
+        <p><i class="fas fa-map-marker-alt"></i> <span id="card-location">تلمسان - الجزائر</span></p>
+    </div>
+
+    <div class="supplier-actions">
+        <button class="view-btn" onclick="viewLatestSupplier()">عرض التفاصيل</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="suppliers-header">
+
+                <h2>قائمة الموردين</h2>
+
+                <div class="header-actions">
+                    <select id="status-filter" onchange="filterByStatus()">
+                        <option value="">جميع الحالات</option>
+                        <option value="نشط">نشط</option>
+                        <option value="غير نشط">غير نشط</option>
+                    </select>
+                    <input type="text" id="search-input" placeholder="البحث عن مورد..." onkeyup="filterSuppliers()">
+                    <button class="export-btn" onclick="exportToCSV()">
+                        <i class="fas fa-download"></i>
+                        تصدير CSV
+                    </button>
+                    <button class="add-btn" onclick="showAddSupplierForm()">
+                        <i class="fas fa-plus"></i>
+                        إضافة مورد
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Add Supplier Form -->
+            <div id="add-supplier-form" class="add-supplier-form" style="display: none;">
+                <h3>إضافة مورد جديد</h3>
+                <input type="text" id="supplier-name" placeholder="اسم المورد" required>
+                <input type="text" id="supplier-phone" placeholder="رقم الهاتف" required>
+                <input type="text" id="supplier-product" placeholder="المنتج" required>
+                <input type="text" id="supplier-location" placeholder="الموقع" required>
+                <button onclick="addSupplier()">إضافة</button>
+                <button onclick="hideAddSupplierForm()">إلغاء</button>
+            </div>
+
+            <table class="suppliers-table">
+
+                <thead>
+                    <tr>
+                        <th>رقم المورد</th>
+                        <th>اسم المورد</th>
+                        <th>رقم الهاتف</th>
+                        <th>المنتج</th>
+                        <th>الحالة</th>
+                        <th>إجراء</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Supplier Details Modal -->
+        <div id="supplier-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h3 id="modal-title">تفاصيل المورد</h3>
+                <p><strong>الاسم:</strong> <span id="modal-name"></span></p>
+                <p><strong>رقم الهاتف:</strong> <span id="modal-phone"></span></p>
+                <p><strong>المنتج:</strong> <span id="modal-product"></span></p>
+                <p><strong>الموقع:</strong> <span id="modal-location"></span></p>
+                <p><strong>الحالة:</strong> <span id="modal-status"></span></p>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="javascript/script.js"></script>
+
+</body>
+</html>

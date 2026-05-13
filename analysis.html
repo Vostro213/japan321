@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>التحليل المالي</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>الوسيط الاقتصادي</h2>
+            <span>النسخة الاحترافية</span>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li onclick="goToDashboard()">
+                <i class="fas fa-home"></i>
+                لوحة التحكم
+            </li>
+
+            <li onclick="goToAccounting()">
+                <i class="fas fa-file-invoice-dollar"></i>
+                الملف المحاسبي
+            </li>
+
+            <li class="active">
+                <i class="fas fa-chart-line"></i>
+                التحليل المالي
+            </li>
+
+            <li onclick="goToSuppliers()">
+                <i class="fas fa-users"></i>
+                الموردين
+            </li>
+
+            <li onclick="goToLegal()">
+                <i class="fas fa-gavel"></i>
+                القانوني
+            </li>
+
+            <li onclick="goToSupport()">
+                <i class="fas fa-headset"></i>
+                الاستشارات
+            </li>
+
+            <li onclick="window.location.href='trainees.html'">
+                <i class="fas fa-graduation-cap"></i>
+                المتدربون
+            </li>
+
+            <li onclick="openService('services')"><i class="fas fa-concierge-bell"></i> الخدمات</li>
+            <li onclick="showProfileModal()" class="sidebar-profile"><i class="fas fa-user"></i> ملف الشخصي</li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <header class="dashboard-header">
+            <h1>التحليل المالي والضريبي</h1>
+        </header>
+
+        <section class="analysis-section">
+
+            <div class="analysis-cards">
+
+                <div class="card" onclick="showFinancialAnalysis()">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>تحليل مالي</h3>
+                    <p>دراسة الوضعية المالية للشركة</p>
+                </div>
+
+                <div class="card" onclick="showTaxAnalysis()">
+                    <i class="fas fa-coins"></i>
+                    <h3>تحليل ضريبي</h3>
+                    <p>تحليل الضرائب والرسوم</p>
+                </div>
+
+                <div class="card" onclick="showFinancialReports()">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>تقارير مالية</h3>
+                    <p>عرض تقارير الشركة</p>
+                </div>
+
+                <div class="card" onclick="showPerformanceIndicators()">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>مؤشرات الأداء</h3>
+                    <p>مراقبة الأداء الاقتصادي</p>
+                </div>
+
+                <div class="card" onclick="showStatistics()">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>إحصائيات</h3>
+                    <p>تحليل البيانات المالية</p>
+                </div>
+
+            </div>
+
+            <!-- Dynamic Content -->
+            <div id="analysis-content" class="dynamic-content">
+                <h2>اختر نوع التحليل لعرض المحتوى</h2>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="javascript/script.js"></script>
+
+</body>
+</html>

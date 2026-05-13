@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الوسيط الاقتصادي - الموقع الرئيسي</title>
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #764ba2;
+            --secondary: #f093fb;
+            --accent: #4facfe;
+            --dark: #0f0c29;
+            --light: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --bg-light: #f8f9fa;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo i {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 10px 22px;
+            border-radius: 25px;
+            color: white !important;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle,
+                    rgba(102, 126, 234, 0.15) 0%,
+                    transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle,
+                    rgba(240, 147, 251, 0.15) 0%,
+                    transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            z-index: 5;
+            animation: fadeUp 1s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 65px;
+            font-weight: 800;
+            margin-bottom: 20px;
+
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cta-button.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .cta-button.secondary {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+        }
+
+        /* ================= GALLERY ================= */
+
+        .gallery-section {
+            padding: 100px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            margin-bottom: 15px;
+
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(135deg,
+                    rgba(102, 126, 234, 0.85),
+                    rgba(240, 147, 251, 0.85));
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            opacity: 0;
+            transition: 0.4s;
+
+            color: white;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features-section {
+            padding: 100px 40px;
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            padding: 40px;
+            border-radius: 20px;
+
+            backdrop-filter: blur(20px);
+
+            transition: 0.4s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            color: white;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            margin-top: 70px;
+            padding: 60px 40px 30px;
+
+            background: rgba(15, 12, 41, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 20px;
+
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-col p,
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.9;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .footer-divider {
+            margin: 30px 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.08);
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateY(-4px);
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* ================= SCROLLBAR ================= */
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            الوسيط الاقتصادي
+        </div>
+
+        <div class="nav-links">
+            <a href="#gallery">المعرض</a>
+            <a href="#features">المميزات</a>
+            <a href="#footer">تواصل معنا</a>
+            <a href="index.html" class="login-btn">دخول / تسجيل</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>الوسيط الاقتصادي</h1>
+
+            <p>
+                منصة احترافية متكاملة للإدارة المحاسبية
+                والاستشارات المالية والقانونية
+                بأحدث التقنيات العصرية.
+            </p>
+
+            <div class="cta-buttons">
+
+                <a href="index.html" class="cta-button primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    ابدأ الآن
+                </a>
+
+                <a href="#features" class="cta-button secondary">
+                    <i class="fas fa-arrow-down"></i>
+                    اكتشف المزيد
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GALLERY -->
+
+    <section class="gallery-section" id="gallery">
+
+        <div class="section-header">
+            <h2>معرض خدماتنا</h2>
+            <p>حلول احترافية متطورة لنمو أعمالك</p>
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="images/ChatGPT Image May 11, 2026, 08_42_41 PM_r1_c1.png"
+                    alt="الإدارة المحاسبية">
+
+                <div class="gallery-overlay">
+                    <h3>الإدارة المحاسبية</h3>
+                    <p>إدارة مالية احترافية لشركتك</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/ChatGPT Image May 11, 2026, 08_42_41 PM_r1_c2.png"
+                    alt="التحليل المالي">
+
+                <div class="gallery-overlay">
+                    <h3>التحليل المالي</h3>
+                    <p>تحليلات دقيقة واحترافية</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/ChatGPT Image May 11, 2026, 08_42_41 PM_r2_c1.png"
+                    alt="إدارة الموارد">
+
+                <div class="gallery-overlay">
+                    <h3>إدارة الموارد</h3>
+                    <p>تنظيم فعال لموارد شركتك</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/ChatGPT Image May 11, 2026, 08_42_41 PM_r2_c2.png"
+                    alt="الاستشارات القانونية">
+
+                <div class="gallery-overlay">
+                    <h3>الاستشارات القانونية</h3>
+                    <p>دعم قانوني متخصص وموثوق</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section class="features-section" id="features">
+
+        <div class="section-header">
+            <h2>ميزاتنا الرئيسية</h2>
+            <p>كل ما تحتاجه في منصة واحدة</p>
+        </div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+
+                <h3>حماية متقدمة</h3>
+
+                <p>
+                    أنظمة أمان وتشفير قوية
+                    لحماية جميع بياناتك ومعلوماتك.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+
+                <h3>أداء سريع</h3>
+
+                <p>
+                    تجربة استخدام سلسة
+                    وسرعة عالية في تنفيذ العمليات.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+
+                <h3>دعم متواصل</h3>
+
+                <p>
+                    فريق دعم جاهز لمساعدتك
+                    والإجابة على استفساراتك دائماً.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fas fa-chart-area"></i>
+                </div>
+
+                <h3>تقارير متقدمة</h3>
+
+                <p>
+                    إحصائيات وتحليلات متطورة
+                    لمساعدتك على اتخاذ أفضل القرارات.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-col">
+
+                <h4>عن الوسيط الاقتصادي</h4>
+
+                <p>
+                    منصة متخصصة في الحلول المحاسبية
+                    والاستشارات المالية والقانونية
+                    للشركات والأفراد.
+                </p>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h4>الخدمات</h4>
+
+                <a href="#">الإدارة المحاسبية</a>
+                <a href="#">التحليل المالي</a>
+                <a href="#">الاستشارات القانونية</a>
+                <a href="#">إدارة الموارد البشرية</a>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h4>روابط سريعة</h4>
+
+                <a href="#">الرئيسية</a>
+                <a href="#gallery">المعرض</a>
+                <a href="#features">المميزات</a>
+                <a href="index.html">تسجيل الدخول</a>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h4>تابعنا</h4>
+
+                <p>تابع صفحاتنا الرسمية على مواقع التواصل.</p>
+
+                <div class="social-links">
+
+                    <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <p>
+                &copy; 2026 الوسيط الاقتصادي - جميع الحقوق محفوظة
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

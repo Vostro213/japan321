@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>الملف المحاسبي</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>الوسيط الاقتصادي</h2>
+            <span>النسخة الاحترافية v1.0</span>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li onclick="smoothNavigate('dashboard.html')"><i class="fas fa-home"></i> لوحة التحكم</li>
+            <li class="active"><i class="fas fa-file-invoice-dollar"></i> الملف المحاسبي</li>
+            <li onclick="smoothNavigate('suppliers.html')"><i class="fas fa-users"></i> نافذة الموردين</li>
+            <li onclick="smoothNavigate('legal.html')"><i class="fas fa-gavel"></i> الملحق القانوني</li>
+            <li onclick="smoothNavigate('support.html')"><i class="fas fa-headset"></i> مركز الاستشارات</li>
+            <li onclick="smoothNavigate('analysis.html')">
+    <i class="fas fa-chart-line"></i>
+    التحليل المالي
+</li>
+      <li onclick="smoothNavigate('trainees.html')"><i class="fas fa-graduation-cap"></i> المتدربون</li>
+      <li onclick="openService('services')"><i class="fas fa-concierge-bell"></i> الخدمات</li>
+            <li onclick="showProfileModal()" class="sidebar-profile"><i class="fas fa-user"></i> ملف الشخصي</li>
+        </ul>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <header class="dashboard-header">
+            <h1>الملف المحاسبي</h1>
+          <div class="user-info">
+
+    <!-- Notifications -->
+    <div class="notifications" onclick="showAlerts()">
+        <i class="fas fa-bell"></i>
+        <span class="badge">2</span>
+    </div>
+
+    <!-- User Profile -->
+    <div class="user-profile" onclick="toggleProfileMenu()">
+
+        <div class="user-avatar">
+            A
+        </div>
+
+        <div class="user-details">
+            <h4 id="userName">اسم المستخدم</h4>
+            <p id="userEmail">email@example.com</p>
+        </div>
+
+        <i class="fas fa-chevron-down"></i>
+
+        <!-- Dropdown Menu -->
+        <div id="profileMenu" class="profile-menu hidden">
+            <p onclick="showProfileModal()"><i class="fas fa-user"></i> الملف الشخصي</p>
+            <p onclick="logout()"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</p>
+        </div>
+
+    </div>
+
+</div>
+
+        </header>
+
+        <!-- Alerts Box -->
+        <div id="alertsBox" class="alerts-box hidden">
+            <p><i class="fas fa-info-circle"></i> تذكير بدفع الفاتورة الشهرية</p>
+            <p><i class="fas fa-check-circle"></i> تم تحديث التقارير المالية</p>
+            <button onclick="addAlert()">إضافة إشعار</button>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeProfileModal()">&times;</span>
+                <h3>تحرير الملف الشخصي</h3>
+                <label>الاسم:</label>
+                <input type="text" id="profile-name" value="اسم المستخدم">
+                <label>البريد الإلكتروني:</label>
+                <input type="email" id="profile-email" value="email@example.com">
+                <button onclick="saveProfile()">حفظ</button>
+            </div>
+        </div>
+
+
+
+ <section class="accounting-cards">
+
+    <div class="card" onclick="alert('فتح الكتابات المحاسبية')">
+        <i class="fas fa-book"></i>
+        <h3>الكتابات المحاسبية</h3>
+        <p>إدارة العمليات المحاسبية</p>
+    </div>
+
+    <div class="card" onclick="alert('فتح ميزان المراجعة')">
+        <i class="fas fa-balance-scale"></i>
+        <h3>ميزان المراجعة</h3>
+        <p>المجاميع والأرصدة</p>
+    </div>
+
+    <div class="card" onclick="showTaxesModal()">
+        <i class="fas fa-calculator"></i>
+        <h3>الضرائب</h3>
+        <p>دفتر المعاملات الضريبية</p>
+    </div>
+
+    <div class="card" onclick="alert('فتح الأصول والخصوم')">
+        <i class="fas fa-chart-pie"></i>
+        <h3>الأصول والخصوم</h3>
+        <p>الوضعية المالية</p>
+    </div>
+
+    <div class="card" onclick="showProfitLossModal()">
+        <i class="fas fa-chart-line"></i>
+        <h3>حسابات النتائج</h3>
+        <p>تحليل الأرباح والخسائر</p>
+    </div>
+
+</section>
+  
+
+
+
+
+        <!-- Accounting Content -->
+<section class="accounting-section">
+
+    <div class="accounting-header">
+        <h2>إدارة الفواتير</h2>
+        <div class="header-actions">
+            <select id="invoice-status-filter" onchange="filterInvoices()">
+                <option value="">جميع الحالات</option>
+                <option value="مدفوعة">مدفوعة</option>
+                <option value="قيد الانتظار">قيد الانتظار</option>
+            </select>
+            <input type="text" id="invoice-search" placeholder="البحث في الفواتير..." onkeyup="filterInvoices()">
+            <button class="export-btn" onclick="exportInvoicesToCSV()">
+                <i class="fas fa-download"></i>
+                تصدير CSV
+            </button>
+            <button class="add-btn" onclick="showAddInvoiceForm()">
+                <i class="fas fa-plus"></i>
+                إضافة فاتورة
+            </button>
+        </div>
+    </div>
+
+    <!-- Add Invoice Form -->
+    <div id="add-invoice-form" class="add-supplier-form" style="display: none;">
+        <h3>إضافة فاتورة جديدة</h3>
+        <input type="text" id="invoice-client" placeholder="اسم العميل" required>
+        <input type="number" id="invoice-amount" placeholder="المبلغ (دج)" required>
+        <input type="date" id="invoice-date" required>
+        <select id="invoice-status">
+            <option value="مدفوعة">مدفوعة</option>
+            <option value="قيد الانتظار">قيد الانتظار</option>
+        </select>
+        <button onclick="addInvoice()">إضافة</button>
+        <button onclick="hideAddInvoiceForm()">إلغاء</button>
+    </div>
+
+    <table class="accounting-table table-hover">
+        <thead>
+            <tr>
+                <th>رقم الفاتورة</th>
+                <th>العميل</th>
+                <th>المبلغ</th>
+                <th>التاريخ</th>
+                <th>الحالة</th>
+                <th>إجراء</th>
+            </tr>
+        </thead>
+        <tbody id="invoice-body">
+        </tbody>
+    </table>
+
+</section>
+
+<!-- Taxes Modal -->
+<div id="taxesModal" class="modal" style="display: none;">
+    <div class="modal-content taxes-modal-content">
+        <span class="close" onclick="closeTaxesModal()">&times;</span>
+        <h2>سجل الضرائب - دفتر يومي</h2>
+        
+        <div class="modal-actions">
+            <input type="text" id="tax-description" placeholder="وصف العملية">
+            <input type="date" id="tax-date">
+            <input type="number" id="tax-amount" placeholder="المبلغ الضريبي (دج)" step="0.01">
+            <select id="tax-type">
+                <option value="دخل">ضريبة على الدخل</option>
+                <option value="قيمة">ضريبة القيمة المضافة</option>
+                <option value="أخرى">ضرائب أخرى</option>
+            </select>
+            <button onclick="addTaxRecord()">إضافة عملية ضريبية</button>
+        </div>
+
+        <table class="accounting-table">
+            <thead>
+                <tr>
+                    <th>التاريخ</th>
+                    <th>الوصف</th>
+                    <th>نوع الضريبة</th>
+                    <th>المبلغ (دج)</th>
+                    <th>إجراء</th>
+                </tr>
+            </thead>
+            <tbody id="tax-records-body">
+            </tbody>
+        </table>
+
+        <div class="modal-summary">
+            <p><strong>إجمالي الضرائب:</strong> <span id="total-taxes">0</span> دج</p>
+        </div>
+    </div>
+</div>
+
+<!-- Profit & Loss Modal -->
+<div id="profitLossModal" class="modal" style="display: none;">
+    <div class="modal-content profit-loss-modal-content">
+        <span class="close" onclick="closeProfitLossModal()">&times;</span>
+        <h2>قائمة الأرباح والخسائر</h2>
+        
+        <div class="modal-actions">
+            <input type="text" id="income-description" placeholder="بند الدخل">
+            <input type="number" id="income-amount" placeholder="المبلغ (دج)" step="0.01">
+            <button onclick="addIncomeItem()">إضافة دخل</button>
+            
+            <span style="margin: 0 10px;">|</span>
+            
+            <input type="text" id="expense-description" placeholder="بند المصروفات">
+            <input type="number" id="expense-amount" placeholder="المبلغ (دج)" step="0.01">
+            <button onclick="addExpenseItem()">إضافة مصروفات</button>
+        </div>
+
+        <div class="profit-loss-content">
+            <div class="income-section">
+                <h3>الدخل والإيرادات</h3>
+                <table class="accounting-table">
+                    <thead>
+                        <tr>
+                            <th>البند</th>
+                            <th>المبلغ (دج)</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="income-body">
+                    </tbody>
+                </table>
+                <p style="text-align: left; margin-top: 10px;"><strong>إجمالي الدخل:</strong> <span id="total-income">0</span> دج</p>
+            </div>
+
+            <div class="expenses-section">
+                <h3>المصروفات</h3>
+                <table class="accounting-table">
+                    <thead>
+                        <tr>
+                            <th>البند</th>
+                            <th>المبلغ (دج)</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenses-body">
+                    </tbody>
+                </table>
+                <p style="text-align: left; margin-top: 10px;"><strong>إجمالي المصروفات:</strong> <span id="total-expenses">0</span> دج</p>
+            </div>
+        </div>
+
+        <div class="modal-summary">
+            <p><strong>صافي الأرباح/الخسائر:</strong> <span id="net-result">0</span> دج</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+        <div class="profit-loss-content">
+            <div class="income-section">
+                <h3>الدخل والإيرادات</h3>
+                <table class="accounting-table">
+                    <thead>
+                        <tr>
+                            <th>البند</th>
+                            <th>المبلغ (دج)</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="income-body">
+                    </tbody>
+                </table>
+                <p style="text-align: left; margin-top: 10px;"><strong>إجمالي الدخل:</strong> <span id="total-income">0</span> دج</p>
+            </div>
+
+            <div class="expenses-section">
+                <h3>المصروفات</h3>
+                <table class="accounting-table">
+                    <thead>
+                        <tr>
+                            <th>البند</th>
+                            <th>المبلغ (دج)</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenses-body">
+                    </tbody>
+                </table>
+                <p style="text-align: left; margin-top: 10px;"><strong>إجمالي المصروفات:</strong> <span id="total-expenses">0</span> دج</p>
+            </div>
+        </div>
+
+        <div class="modal-summary">
+            <p><strong>صافي الأرباح/الخسائر:</strong> <span id="net-result">0</span> دج</p>
+        </div>
+    </div>
+</div>
+    </main>
+
+</div>
+
+<script src="javascript/script.js"></script>
+<script src="javascript/taxes-profit-loss.js"></script>
+</body>
+</html>
+
+</body>
